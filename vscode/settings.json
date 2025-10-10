@@ -1,0 +1,80 @@
+{
+    "workbench.iconTheme": "material-icon-theme",
+    "[dart]": {
+        "editor.formatOnSave": true,
+        "editor.formatOnType": true,
+        "editor.rulers": [
+            80
+        ],
+        "editor.selectionHighlight": false,
+        "editor.suggest.snippetsPreventQuickSuggestions": false,
+        "editor.suggestSelection": "first",
+        "editor.tabCompletion": "onlySnippets",
+        "editor.wordBasedSuggestions": "off"
+    },
+    "dart.debugExternalPackageLibraries": true,
+    "dart.debugSdkLibraries": true,
+    "dart.lineLength": 120,
+    "terminal.integrated.defaultProfile.windows": "PowerShell",
+    "workbench.colorTheme": "One Dark Pro Darker",
+    "python.languageServer": "Pylance",
+    "python.analysis.autoImportCompletions": true,
+    "python.analysis.typeCheckingMode": "basic",
+    "editor.fontFamily": "Fira Code",
+    "editor.fontLigatures": true,
+    "editor.fontWeight": "normal",
+    // my custom settings
+    "editor.formatOnSave": true,
+    "editor.rulers": [
+        80,
+        120
+    ],
+    "files.exclude": {
+        "**/__pycache__": true,
+        "**/node_modules": true,
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        ".vscode": true,
+        "**/*.pyc": true,
+    },
+    "workbench.editor.enablePreview": false,
+    "python.linting.pylintArgs": [
+        "--load-plugins",
+        "pylint_django"
+    ],
+    "[python]": {
+        "editor.formatOnType": true,
+    },
+    "python.formatting.provider": "autopep8",
+    "python.formatting.autopep8Args": [
+        "--ignore",
+        "E261,E262"
+    ],
+    "editor.codeActionsOnSave": {},
+    "editor.minimap.enabled": true,
+    "emmet.triggerExpansionOnTab": true,
+    "terminal.integrated.fontFamily": "Fira Code",
+    "terminal.integrated.fontSize": 14,
+    "workbench.colorCustomizations": {
+        "[Monokai Night]": {
+            "editorWarning.foreground": "#005ac7",
+            "editorInfo.foreground": "#004090",
+            "gitDecoration.modifiedResourceForeground": "#ffc03a",
+            "list.warningForeground": "#4e88ce"
+        }
+    },
+    "workbench.settings.applyToAllProfiles": [
+        "python.REPL.enableREPLSmartSend"
+    ],
+    "security.workspace.trust.untrustedFiles": "open",
+    "settingsSync.ignoredSettings": [
+        "dbt.dbtPythonPathOverride"
+    ],
+    "window.menuBarVisibility": "classic",
+    "git.enableSmartCommit": true,
+    "gitlens.ai.model": "vscode",
+    "gitlens.ai.vscode.model": "copilot:gpt-4.1"
+}

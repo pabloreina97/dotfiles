@@ -1,0 +1,42 @@
+# Archivos de backup
+*.backup.*
+*.bak
+*.swp
+*.swo
+*~
+
+# Archivos temporales
+.DS_Store
+Thumbs.db
+
+# Archivos sensibles
+config/gh/hosts.yml
+*.pem
+*.key
+*.secret
+.env
+.env.local
+
+# Historial y cache
+.zsh_history
+.bash_history
+.lesshst
+
+# Configuraciones específicas de la máquina
+config/Code/User/globalStorage/
+config/Code/User/workspaceStorage/
+config/Code/logs/
+config/Code/CachedData/
+config/Code/CachedExtensions/
+config/Code/CachedExtensionVSIXs/
+config/Code/Cache/
+config/Code/GPUCache/
+
+# Excluir configuración local de gcloud
+config/gcloud/
+
+# Node modules si los hubiera
+node_modules/
+
+# Logs
+*.log

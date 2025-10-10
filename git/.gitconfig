@@ -1,0 +1,18 @@
+[core]
+	editor = code --wait
+[user]
+	name = Pablo Reina
+	email = pabloreinagalvez@gmail.com
+	signingkey = /home/pablo/.ssh/id_ed25519.pub
+[alias]
+	tree = log --oneline --graph --decorate --all
+	ci = commit
+	co = checkout
+	st = status
+	current-branch = rev-parse --abbrev-ref HEAD
+[commit]
+	gpgsign = true
+[gpg]
+	format = ssh
+[pull]
+	ff = only
