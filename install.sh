@@ -64,6 +64,10 @@ if [ -d "$DOTFILES_DIR/config/gh" ]; then
     echo -e "${GREEN}✓${NC} Linked: ~/.config/gh -> $DOTFILES_DIR/config/gh"
 fi
 
+# Claude Code
+mkdir -p "$HOME/.claude"
+create_symlink "$DOTFILES_DIR/claude/settings.json" "$HOME/.claude/settings.json"
+
 echo ""
 echo -e "${GREEN}=====================================${NC}"
 echo -e "${GREEN}  Instalación completada!${NC}"

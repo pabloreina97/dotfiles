@@ -18,6 +18,8 @@ dotfiles/
 │   └── extensions.txt
 ├── config/            # Otras configuraciones (~/.config)
 │   └── gh/           # GitHub CLI config
+├── claude/            # Configuración de Claude Code
+│   └── settings.json  # Settings de Claude Code
 ├── scripts/           # Scripts de instalación
 │   └── setup-packages.sh
 └── install.sh         # Script principal de instalación
@@ -81,14 +83,17 @@ El script `setup-packages.sh` instala:
 Los symlinks se crean automáticamente:
 
 ```
-~/.zshrc          -> ~/projects/dotfiles/shell/.zshrc
-~/.bashrc         -> ~/projects/dotfiles/shell/.bashrc
-~/.p10k.zsh       -> ~/projects/dotfiles/shell/.p10k.zsh
-~/.gitconfig      -> ~/projects/dotfiles/git/.gitconfig
-~/.config/gh      -> ~/projects/dotfiles/config/gh
+~/.zshrc                  -> ~/projects/dotfiles/shell/.zshrc
+~/.bashrc                 -> ~/projects/dotfiles/shell/.bashrc
+~/.p10k.zsh               -> ~/projects/dotfiles/shell/.p10k.zsh
+~/.gitconfig              -> ~/projects/dotfiles/git/.gitconfig
+~/.config/gh              -> ~/projects/dotfiles/config/gh
+~/.claude/settings.json   -> ~/projects/dotfiles/claude/settings.json
 ```
 
-**Nota sobre VSCode:** La configuración de VSCode se sincroniza mediante **Settings Sync** con tu cuenta de GitHub, no mediante symlinks. Para activarlo: `Ctrl+Shift+P` -> "Settings Sync: Turn On"
+**Notas especiales:**
+- **VSCode:** La configuración de VSCode se sincroniza mediante **Settings Sync** con tu cuenta de GitHub, no mediante symlinks. Para activarlo: `Ctrl+Shift+P` -> "Settings Sync: Turn On"
+- **Claude Code:** La configuración de Claude Code (`~/.claude/settings.json`) sí usa symlinks para sincronizarse entre máquinas
 
 ## Personalización
 

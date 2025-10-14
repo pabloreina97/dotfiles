@@ -19,6 +19,7 @@ The core architecture uses symlinks from system config locations to files in thi
 - `~/.p10k.zsh` → `~/projects/dotfiles/shell/.p10k.zsh`
 - `~/.gitconfig` → `~/projects/dotfiles/git/.gitconfig`
 - `~/.config/gh` → `~/projects/dotfiles/config/gh`
+- `~/.claude/settings.json` → `~/projects/dotfiles/claude/settings.json`
 
 This means editing files in their normal locations (e.g., `~/.zshrc`) automatically updates the repository.
 
@@ -32,6 +33,7 @@ dotfiles/
 ├── git/                # Git global configuration
 ├── vscode/             # VSCode settings, keybindings, extensions list
 ├── config/             # Other ~/.config files (gh CLI, etc.)
+├── claude/             # Claude Code settings
 ├── gnome/              # GNOME desktop settings (dconf dumps)
 ├── scripts/            # Installation and setup scripts
 └── install.sh          # Main symlink creation script
