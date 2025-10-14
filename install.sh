@@ -51,13 +51,9 @@ echo -e "${YELLOW}2. Creando symlinks para configuración de Git...${NC}"
 create_symlink "$DOTFILES_DIR/git/.gitconfig" "$HOME/.gitconfig"
 
 echo ""
-echo -e "${YELLOW}3. Creando symlinks para configuración de VSCode...${NC}"
-VSCODE_USER_DIR="$HOME/.config/Code/User"
-if [ ! -d "$VSCODE_USER_DIR" ]; then
-    mkdir -p "$VSCODE_USER_DIR"
-fi
-create_symlink "$DOTFILES_DIR/vscode/settings.json" "$VSCODE_USER_DIR/settings.json"
-create_symlink "$DOTFILES_DIR/vscode/keybindings.json" "$VSCODE_USER_DIR/keybindings.json"
+echo -e "${YELLOW}3. Configuración de VSCode...${NC}"
+echo -e "VSCode se sincroniza con Settings Sync (GitHub). No se crean symlinks."
+echo -e "Para activar: Ctrl+Shift+P -> 'Settings Sync: Turn On'"
 
 echo ""
 echo -e "${YELLOW}4. Creando symlinks para otras configuraciones...${NC}"

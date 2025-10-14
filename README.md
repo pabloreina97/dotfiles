@@ -84,9 +84,10 @@ Los symlinks se crean automáticamente:
 ~/.bashrc         -> ~/projects/dotfiles/shell/.bashrc
 ~/.p10k.zsh       -> ~/projects/dotfiles/shell/.p10k.zsh
 ~/.gitconfig      -> ~/projects/dotfiles/git/.gitconfig
-~/.config/Code/User/settings.json -> ~/projects/dotfiles/vscode/settings.json
 ~/.config/gh      -> ~/projects/dotfiles/config/gh
 ```
+
+**Nota sobre VSCode:** La configuración de VSCode se sincroniza mediante **Settings Sync** con tu cuenta de GitHub, no mediante symlinks. Para activarlo: `Ctrl+Shift+P` -> "Settings Sync: Turn On"
 
 ## Personalización
 
@@ -124,12 +125,8 @@ git status
 
 ## Actualizar Configuraciones
 
-### VSCode Extensions
-```bash
-code --list-extensions > vscode/extensions.txt
-git add vscode/extensions.txt
-git commit -m "Actualizar extensiones de VSCode"
-```
+### VSCode
+VSCode se sincroniza automáticamente con **Settings Sync** (GitHub). La carpeta `vscode/` en este repo es solo referencia y no se usa activamente.
 
 ### Configuración de GNOME
 Cuando hagas cambios en GNOME (Dash to Panel, temas, etc.), expórtalos:
