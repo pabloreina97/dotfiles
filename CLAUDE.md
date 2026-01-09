@@ -35,7 +35,21 @@ dotfiles/
 ├── config/             # Other ~/.config files (gh CLI, etc.)
 ├── claude/             # Claude Code settings
 ├── gnome/              # GNOME desktop settings (dconf dumps)
-├── scripts/            # Installation and setup scripts
+├── scripts/
+│   ├── lib/
+│   │   └── common.sh       # Funciones compartidas (colores, helpers)
+│   ├── installers/
+│   │   ├── system.sh       # Paquetes base del sistema
+│   │   ├── shell.sh        # Zsh, Oh My Zsh, plugins
+│   │   ├── dev-tools.sh    # NVM, Docker, uv
+│   │   ├── cli-tools.sh    # gh, claude, bat, eza, tldr, micro
+│   │   ├── apps.sh         # VSCode, Chrome
+│   │   └── fonts.sh        # Fira Code Nerd Font
+│   ├── setup.sh            # Script principal con menu interactivo
+│   ├── setup-git-ssh.sh    # Configuracion Git y SSH
+│   ├── setup-gnome.sh      # Configuracion GNOME
+│   ├── export-gnome.sh     # Exportar settings GNOME
+│   └── apply-theme.sh      # Tema One Dark para terminal
 └── install.sh          # Main symlink creation script
 ```
 
@@ -46,10 +60,16 @@ dotfiles/
 **CRITICAL ORDER**: Must run in this exact sequence to avoid Oh My Zsh overwriting the custom .zshrc:
 
 ```bash
-# 1. Install all packages, tools, and dependencies (including Oh My Zsh)
-./scripts/setup-packages.sh
+# 1. Run interactive setup (select components to install)
+./scripts/setup.sh
 
-# 2. Create symlinks - this MUST run AFTER setup-packages.sh
+# Or install everything at once:
+./scripts/setup.sh --all
+
+# Or install specific components:
+./scripts/setup.sh --only system,shell,dev-tools
+
+# 2. Create symlinks - this MUST run AFTER setup.sh
 #    to overwrite Oh My Zsh's default .zshrc with the custom one
 ./install.sh
 
@@ -94,18 +114,42 @@ git pull
 
 Creates all symlinks from repository to system locations. Automatically backs up existing files with timestamp before creating symlinks (`.backup.YYYYMMDD_HHMMSS`).
 
-### scripts/setup-packages.sh
+### scripts/setup.sh (Script Principal)
 
-Comprehensive package installation script that installs:
-- Shell: Zsh, Oh My Zsh, Powerlevel10k, zsh-autosuggestions, zsh-syntax-highlighting
-- Terminal theme: One Dark (247) via Gogh
-- Dev tools: Git, build-essential, Node.js (via NVM), Python (via uv), Docker
-- CLI tools: gh (GitHub CLI), claude (Claude CLI), bat, eza, tldr, micro
-- Applications: VSCode (with extensions from extensions.txt), Google Chrome
-- Fonts: Fira Code Nerd Font
-- Generates SSH key for GitHub if not present
+Script principal con menu interactivo para seleccionar componentes a instalar.
 
-**Interactive**: Prompts for Git name/email and SSH key email if not configured.
+**Uso:**
+```bash
+./scripts/setup.sh              # Menu interactivo
+./scripts/setup.sh --all        # Instalar todo
+./scripts/setup.sh --only X,Y   # Solo componentes especificos
+./scripts/setup.sh --list       # Listar componentes disponibles
+```
+
+**Componentes disponibles:**
+- `system` - Actualizacion apt + paquetes base (git, curl, build-essential, flatpak)
+- `shell` - Zsh, Oh My Zsh, Powerlevel10k, plugins, tema One Dark
+- `git-ssh` - Configuracion Git y generacion de SSH key
+- `dev-tools` - NVM/Node.js, Docker, uv (Python)
+- `cli-tools` - gh, claude, bat, eza, tldr, micro
+- `apps` - VSCode + extensiones, Google Chrome
+- `fonts` - Fira Code Nerd Font
+
+### scripts/installers/
+
+Directorio con scripts modulares para cada categoria. Pueden ejecutarse individualmente:
+
+```bash
+./scripts/installers/shell.sh      # Solo shell
+./scripts/installers/dev-tools.sh  # Solo herramientas dev
+```
+
+### scripts/setup-git-ssh.sh
+
+Configuracion interactiva de Git y SSH:
+- Solicita nombre y email para Git
+- Genera SSH key para GitHub
+- Muestra la clave publica para agregarla a GitHub
 
 ### scripts/apply-theme.sh
 
@@ -145,6 +189,13 @@ Exports current GNOME configuration to repository:
 2. Edit `install.sh` to add the symlink creation logic
 3. Test by running `./install.sh`
 4. Commit changes
+
+### When Adding New Installers
+
+1. Create script in `scripts/installers/` siguiendo el patron existente
+2. Usar `source "$SCRIPT_DIR/../lib/common.sh"` para funciones comunes
+3. Agregar el componente en `scripts/setup.sh` (arrays COMPONENTS e INSTALL_ORDER)
+4. Probar ejecutando el instalador individualmente y desde el menu
 
 ### Backup System
 
