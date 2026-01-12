@@ -1,34 +1,62 @@
 {
+    // ===== Tema y Apariencia =====
+    "workbench.colorTheme": "One Dark Pro Darker",
     "workbench.iconTheme": "material-icon-theme",
+    "workbench.editor.enablePreview": false,
+    // "workbench.colorCustomizations": {
+    //     "[Monokai Night]": {
+    //         "editorWarning.foreground": "#005ac7",
+    //         "editorInfo.foreground": "#004090",
+    //         "gitDecoration.modifiedResourceForeground": "#ffc03a",
+    //         "list.warningForeground": "#4e88ce"
+    //     }
+    // },
+
+    // ===== Editor General =====
+    "editor.fontFamily": "Fira Code",
+    "editor.fontLigatures": true,
+    "editor.fontWeight": "normal",
+    "editor.formatOnSave": true,
+    "editor.rulers": [80, 120],
+    "editor.minimap.enabled": true,
+    "editor.codeActionsOnSave": {},
+
+    // ===== Terminal =====
+    "terminal.integrated.fontFamily": "Fira Code",
+    "terminal.integrated.fontSize": 14,
+
+    // ===== Python =====
+    "python.languageServer": "Pylance",
+    "python.analysis.autoImportCompletions": true,
+    "python.analysis.typeCheckingMode": "basic",
+    "python.formatting.provider": "autopep8",
+    "python.formatting.autopep8Args": ["--ignore", "E261,E262"],
+    "python.linting.pylintArgs": ["--load-plugins", "pylint_django"],
+
+    // ===== Dart =====
+    "dart.lineLength": 120,
+    "dart.debugExternalPackageLibraries": true,
+    "dart.debugSdkLibraries": true,
     "[dart]": {
         "editor.formatOnSave": true,
-        "editor.formatOnType": true,
-        "editor.rulers": [
-            80
-        ],
+        "editor.formatOnType": false,
+        "editor.rulers": [80],
         "editor.selectionHighlight": false,
         "editor.suggest.snippetsPreventQuickSuggestions": false,
         "editor.suggestSelection": "first",
         "editor.tabCompletion": "onlySnippets",
         "editor.wordBasedSuggestions": "off"
     },
-    "dart.debugExternalPackageLibraries": true,
-    "dart.debugSdkLibraries": true,
-    "dart.lineLength": 120,
-    "terminal.integrated.defaultProfile.windows": "PowerShell",
-    "workbench.colorTheme": "One Dark Pro Darker",
-    "python.languageServer": "Pylance",
-    "python.analysis.autoImportCompletions": true,
-    "python.analysis.typeCheckingMode": "basic",
-    "editor.fontFamily": "Fira Code",
-    "editor.fontLigatures": true,
-    "editor.fontWeight": "normal",
-    // my custom settings
-    "editor.formatOnSave": true,
-    "editor.rulers": [
-        80,
-        120
-    ],
+
+    // ===== Git =====
+    "git.enableSmartCommit": true,
+    "gitlens.ai.model": "vscode",
+    "gitlens.ai.vscode.model": "copilot:gpt-4.1",
+
+    // ===== Emmet =====
+    "emmet.triggerExpansionOnTab": true,
+
+    // ===== Archivos y Explorador =====
     "files.exclude": {
         "**/__pycache__": true,
         "**/node_modules": true,
@@ -37,44 +65,10 @@
         "**/.hg": true,
         "**/CVS": true,
         "**/.DS_Store": true,
-        ".vscode": true,
-        "**/*.pyc": true,
+        "**/*.pyc": true
     },
-    "workbench.editor.enablePreview": false,
-    "python.linting.pylintArgs": [
-        "--load-plugins",
-        "pylint_django"
-    ],
-    "[python]": {
-        "editor.formatOnType": true,
-    },
-    "python.formatting.provider": "autopep8",
-    "python.formatting.autopep8Args": [
-        "--ignore",
-        "E261,E262"
-    ],
-    "editor.codeActionsOnSave": {},
-    "editor.minimap.enabled": true,
-    "emmet.triggerExpansionOnTab": true,
-    "terminal.integrated.fontFamily": "Fira Code",
-    "terminal.integrated.fontSize": 14,
-    "workbench.colorCustomizations": {
-        "[Monokai Night]": {
-            "editorWarning.foreground": "#005ac7",
-            "editorInfo.foreground": "#004090",
-            "gitDecoration.modifiedResourceForeground": "#ffc03a",
-            "list.warningForeground": "#4e88ce"
-        }
-    },
-    "workbench.settings.applyToAllProfiles": [
-        "python.REPL.enableREPLSmartSend"
-    ],
+
+    // ===== Seguridad y Sincronizacion =====
     "security.workspace.trust.untrustedFiles": "open",
-    "settingsSync.ignoredSettings": [
-        "dbt.dbtPythonPathOverride"
-    ],
     "window.menuBarVisibility": "classic",
-    "git.enableSmartCommit": true,
-    "gitlens.ai.model": "vscode",
-    "gitlens.ai.vscode.model": "copilot:gpt-4.1"
 }
