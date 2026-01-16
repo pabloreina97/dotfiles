@@ -13,14 +13,16 @@ print_header "Aplicaciones"
 declare -A APPS=(
     ["chrome"]="Google Chrome"
     ["vscode"]="Visual Studio Code"
+    ["slack"]="Slack"
     ["flameshot"]="Flameshot (capturas)"
     ["claude"]="Claude Code CLI"
     ["gcloud"]="Google Cloud CLI"
+    ["terraform"]="Terraform (HashiCorp)"
     ["rm-firefox"]="[Desinstalar] Firefox"
 )
 
 # Orden de apps en el menu
-APP_ORDER=("chrome" "vscode" "flameshot" "claude" "gcloud" "rm-firefox")
+APP_ORDER=("chrome" "vscode" "slack" "flameshot" "claude" "gcloud" "terraform" "rm-firefox")
 
 # Funciones de instalacion para cada app
 install_chrome() {
@@ -47,6 +49,16 @@ install_vscode() {
         print_success "VSCode instalado"
     else
         print_info "VSCode ya esta instalado"
+    fi
+}
+
+install_slack() {
+    if ! snap list slack &>/dev/null; then
+        print_step "Instalando Slack..."
+        sudo snap install slack
+        print_success "Slack instalado"
+    else
+        print_info "Slack ya esta instalado"
     fi
 }
 
@@ -121,6 +133,26 @@ install_gcloud() {
     fi
 }
 
+install_terraform() {
+    if ! is_installed terraform; then
+        print_step "Instalando Terraform..."
+
+        # Instalar dependencias
+        sudo apt install -y gnupg software-properties-common
+
+        # Añadir repo de HashiCorp
+        wget -qO- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
+        echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list > /dev/null
+
+        sudo apt update
+        sudo apt install -y terraform
+
+        print_success "Terraform instalado"
+    else
+        print_info "Terraform ya esta instalado ($(terraform version -json | jq -r '.terraform_version'))"
+    fi
+}
+
 remove_firefox() {
     # Firefox puede estar instalado como snap o apt
     if snap list firefox &>/dev/null; then
@@ -147,7 +179,7 @@ select_apps() {
     local options=()
     for app in "${APP_ORDER[@]}"; do
         # Algunas apps OFF por defecto
-        if [[ "$app" == "rm-firefox" || "$app" == "gcloud" ]]; then
+        if [[ "$app" == "rm-firefox" || "$app" == "gcloud" || "$app" == "terraform" ]]; then
             options+=("$app" "${APPS[$app]}" "OFF")
         else
             options+=("$app" "${APPS[$app]}" "ON")
@@ -156,7 +188,7 @@ select_apps() {
 
     local selected
     selected=$(whiptail --title "Aplicaciones" \
-        --checklist "Selecciona las aplicaciones a instalar/desinstalar:" 18 60 6 \
+        --checklist "Selecciona las aplicaciones a instalar/desinstalar:" 22 60 8 \
         "${options[@]}" \
         3>&1 1>&2 2>&3) || return 0
 
@@ -177,9 +209,11 @@ main() {
         case "$app" in
             chrome)     install_chrome ;;
             vscode)     install_vscode ;;
+            slack)      install_slack ;;
             flameshot)  install_flameshot ;;
             claude)     install_claude ;;
             gcloud)     install_gcloud ;;
+            terraform)  install_terraform ;;
             rm-firefox) remove_firefox ;;
         esac
     done
