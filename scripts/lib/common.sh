@@ -3,12 +3,36 @@
 # Funciones compartidas para scripts de instalacion
 # Uso: source "$(dirname "$0")/lib/common.sh"
 
-# Colores
+# Colores para terminal
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
 NC='\033[0m'
+
+# Tema sobrio para whiptail (grises)
+export NEWT_COLORS='
+root=white,black
+border=white,black
+window=white,black
+shadow=black,black
+title=white,black
+button=black,white
+actbutton=black,cyan
+checkbox=white,black
+actcheckbox=black,cyan
+compactbutton=white,black
+entry=white,black
+label=white,black
+listbox=white,black
+actlistbox=black,white
+textbox=white,black
+acttextbox=black,white
+helpline=black,white
+roottext=white,black
+sellistbox=black,cyan
+actsellistbox=black,cyan
+'
 
 # Directorio base del repositorio
 DOTFILES_DIR="$HOME/projects/dotfiles"
