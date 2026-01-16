@@ -53,4 +53,15 @@ else
     print_info "uv ya esta instalado"
 fi
 
+# Rust (rustup + cargo)
+print_step "Instalando Rust..."
+if ! is_installed cargo; then
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+    source "$HOME/.cargo/env"
+    print_success "Rust instalado"
+    print_warning "Reinicia tu terminal para usar cargo"
+else
+    print_info "Rust ya esta instalado"
+fi
+
 print_success "Herramientas de desarrollo instaladas"

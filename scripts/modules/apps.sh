@@ -15,6 +15,7 @@ declare -A APPS=(
     ["vscode"]="Visual Studio Code"
     ["slack"]="Slack"
     ["flameshot"]="Flameshot (capturas)"
+    ["rustdesk"]="RustDesk (escritorio remoto)"
     ["claude"]="Claude Code CLI"
     ["gcloud"]="Google Cloud CLI"
     ["terraform"]="Terraform (HashiCorp)"
@@ -22,7 +23,7 @@ declare -A APPS=(
 )
 
 # Orden de apps en el menu
-APP_ORDER=("chrome" "vscode" "slack" "flameshot" "claude" "gcloud" "terraform" "rm-firefox")
+APP_ORDER=("chrome" "vscode" "slack" "flameshot" "rustdesk" "claude" "gcloud" "terraform" "rm-firefox")
 
 # Funciones de instalacion para cada app
 install_chrome() {
@@ -70,6 +71,20 @@ install_flameshot() {
         print_info "Atajo recomendado: asignar 'flameshot gui' a Impr Pant"
     else
         print_info "Flameshot ya esta instalado"
+    fi
+}
+
+install_rustdesk() {
+    if ! is_installed rustdesk; then
+        print_step "Instalando RustDesk..."
+        local version
+        version=$(curl -s https://api.github.com/repos/rustdesk/rustdesk/releases/latest | grep -Po '"tag_name": "\K[^"]*')
+        wget -q -O /tmp/rustdesk.deb "https://github.com/rustdesk/rustdesk/releases/download/${version}/rustdesk-${version}-x86_64.deb"
+        sudo apt install -y /tmp/rustdesk.deb
+        rm /tmp/rustdesk.deb
+        print_success "RustDesk instalado"
+    else
+        print_info "RustDesk ya esta instalado"
     fi
 }
 
@@ -211,6 +226,7 @@ main() {
             vscode)     install_vscode ;;
             slack)      install_slack ;;
             flameshot)  install_flameshot ;;
+            rustdesk)   install_rustdesk ;;
             claude)     install_claude ;;
             gcloud)     install_gcloud ;;
             terraform)  install_terraform ;;
