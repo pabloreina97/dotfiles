@@ -37,4 +37,8 @@ else
     print_info "Flathub ya esta configurado"
 fi
 
+# Instalar clipboard segun display server (X11 o Wayland)
+print_step "Instalando herramienta de clipboard..."
+install_clipboard
+
 print_success "Sistema base instalado correctamente"

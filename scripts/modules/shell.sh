@@ -61,13 +61,22 @@ if [ "$SHELL" != "$(which zsh)" ]; then
     print_success "Shell cambiado a zsh (requiere reinicio de sesion)"
 fi
 
-# Aplicar tema One Dark
+# Aplicar tema One Dark al terminal
 print_step "Aplicando tema One Dark..."
-if file_exists "$SCRIPT_DIR/../apply-theme.sh"; then
-    bash "$SCRIPT_DIR/../apply-theme.sh"
+if is_installed dconf; then
+    # Instalar dependencias de Gogh
+    if ! is_installed uuid-runtime; then
+        sudo apt install -y dconf-cli uuid-runtime
+    fi
+    # Descargar y aplicar tema One Dark (247) con Gogh
+    export TERMINAL=gnome-terminal
+    bash -c "$(wget -qO- https://git.io/vQgMr)" <<< "247
+"
+    print_success "Tema One Dark aplicado"
+    print_info "Selecciona el perfil 'One Dark' en preferencias del terminal"
 else
-    print_warning "Script apply-theme.sh no encontrado"
+    print_warning "dconf no instalado, saltando tema"
 fi
 
 print_success "Shell configurado correctamente"
-print_warning "Recuerda ejecutar ./install.sh despues para aplicar tu .zshrc personalizado"
+print_info "Ejecuta el modulo 'config' para personalizar tu .zshrc"

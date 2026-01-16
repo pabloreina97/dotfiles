@@ -13,30 +13,32 @@ source "$SCRIPT_DIR/lib/common.sh"
 
 # Componentes disponibles
 declare -A COMPONENTS=(
-    ["system"]="Sistema (actualizacion + paquetes base)"
-    ["shell"]="Shell (Zsh + Oh My Zsh + tema)"
-    ["git-ssh"]="Git y SSH"
-    ["dev-tools"]="Herramientas Dev (Node, Docker, uv)"
-    ["cli-tools"]="CLI Tools (gh, claude, bat, eza...)"
-    ["apps"]="Aplicaciones (VSCode, Chrome, Flameshot)"
-    ["fonts"]="Fuentes (Fira Code, Nerd Font)"
+    ["system"]="Sistema base + clipboard"
+    ["shell"]="Zsh + Oh My Zsh + tema One Dark"
+    ["git"]="Git + SSH + GitHub auth"
+    ["dev"]="Node.js, Docker, uv (Python)"
+    ["cli"]="CLI tools (bat, eza, ripgrep...)"
+    ["apps"]="Aplicaciones (selector)"
+    ["fonts"]="Fuentes Nerd Font"
+    ["config"]="Personalizar configs (zshrc, bashrc)"
 )
 
 # Orden de instalacion
-INSTALL_ORDER=("system" "shell" "git-ssh" "dev-tools" "cli-tools" "apps" "fonts")
+INSTALL_ORDER=("system" "shell" "git" "dev" "cli" "apps" "fonts" "config")
 
 # Ejecutar instalador
 run_installer() {
     local component="$1"
     case "$component" in
-        system)    bash "$SCRIPT_DIR/installers/system.sh" ;;
-        shell)     bash "$SCRIPT_DIR/installers/shell.sh" ;;
-        git-ssh)   bash "$SCRIPT_DIR/setup-git-ssh.sh" ;;
-        dev-tools) bash "$SCRIPT_DIR/installers/dev-tools.sh" ;;
-        cli-tools) bash "$SCRIPT_DIR/installers/cli-tools.sh" ;;
-        apps)      bash "$SCRIPT_DIR/installers/apps.sh" ;;
-        fonts)     bash "$SCRIPT_DIR/installers/fonts.sh" ;;
-        *)         print_error "Componente desconocido: $component" ;;
+        system) bash "$SCRIPT_DIR/modules/system.sh" ;;
+        shell)  bash "$SCRIPT_DIR/modules/shell.sh" ;;
+        git)    bash "$SCRIPT_DIR/modules/git.sh" ;;
+        dev)    bash "$SCRIPT_DIR/modules/dev.sh" ;;
+        cli)    bash "$SCRIPT_DIR/modules/cli.sh" ;;
+        apps)   bash "$SCRIPT_DIR/modules/apps.sh" ;;
+        fonts)  bash "$SCRIPT_DIR/modules/fonts.sh" ;;
+        config) bash "$SCRIPT_DIR/modules/config.sh" ;;
+        *)      print_error "Componente desconocido: $component" ;;
     esac
 }
 
@@ -125,7 +127,7 @@ main() {
             ;;
         --only)
             if [ -z "${2:-}" ]; then
-                print_error "Especifica los componentes: --only system,shell,dev-tools"
+                print_error "Especifica los componentes: --only system,shell,dev"
                 exit 1
             fi
             IFS=',' read -ra SELECTED <<< "$2"

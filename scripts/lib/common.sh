@@ -81,3 +81,46 @@ get_script_dir() {
 get_scripts_dir() {
     echo "$DOTFILES_DIR/scripts"
 }
+
+# Detectar display server (X11 o Wayland)
+detect_display_server() {
+    if [[ "$XDG_SESSION_TYPE" == "wayland" ]]; then
+        echo "wayland"
+    else
+        echo "x11"
+    fi
+}
+
+# Instalar clipboard segun display server
+install_clipboard() {
+    local display=$(detect_display_server)
+    print_step "Detectado: $display"
+    if [[ "$display" == "wayland" ]]; then
+        if ! is_installed wl-copy; then
+            sudo apt install -y wl-clipboard
+            print_success "wl-clipboard instalado (Wayland)"
+        else
+            print_info "wl-clipboard ya esta instalado"
+        fi
+    else
+        if ! is_installed xclip; then
+            sudo apt install -y xclip
+            print_success "xclip instalado (X11)"
+        else
+            print_info "xclip ya esta instalado"
+        fi
+    fi
+}
+
+# Mostrar checklist con whiptail
+show_checklist() {
+    local title="$1"
+    local prompt="$2"
+    shift 2
+    local options=("$@")
+
+    whiptail --title "$title" \
+        --checklist "$prompt" 20 70 10 \
+        "${options[@]}" \
+        3>&1 1>&2 2>&3
+}
