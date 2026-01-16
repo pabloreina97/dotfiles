@@ -135,3 +135,7 @@ export PATH="$HOME/scripts:$PATH"
 
 # PATH
 export PATH="$HOME/.local/bin:$PATH"
+export PATH="$PATH:/opt/flutter/bin"
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/bin/terraform terraform

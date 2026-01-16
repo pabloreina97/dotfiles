@@ -26,8 +26,7 @@ sudo apt install -y \
     ca-certificates \
     gnupg \
     lsb-release \
-    flatpak \
-    gnome-software-plugin-flatpak
+    flatpak
 
 # Agregar repositorio de Flathub
 print_step "Configurando Flatpak..."
