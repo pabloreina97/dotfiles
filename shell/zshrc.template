@@ -106,36 +106,46 @@ source $ZSH/oh-my-zsh.sh
 # - $ZSH_CUSTOM/macos.zsh
 # For a full list of active aliases, run `alias`.
 #
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+# Environment variables
+export NVM_DIR="$HOME/.nvm"
+export GOOGLE_APPLICATION_CREDENTIALS="/home/pablo/.config/gcloud/application_default_credentials.json"
+export CLICKUP_API_TOKEN='pk_87674676_V8MMRJ45DBEB57W8GNZ99PVCPZGWG381'
+
+# PATH
+export PATH="$HOME/scripts:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
+
+# NVM
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+
+# Aliases
 alias avenv='source .venv/bin/activate'
 alias bat="batcat"
 alias cdag='cd ~/projects/analytics-genially'
+alias chromep='google-chrome --profile-directory="Default" >/dev/null 2>&1 &'
+alias chromet='google-chrome --profile-directory="Profile 1" >/dev/null 2>&1 &'
 alias gpt='google-chrome --profile-directory="Default" https://chat.openai.com >/dev/null 2>&1 &'
 alias deepl='google-chrome --profile-directory="Profile 1" https://www.deepl.com/es/write >/dev/null 2>&1 &'
 alias meta='google-chrome --profile-directory="Profile 1" https://genially.metabaseapp.com/ >/dev/null 2>&1 &'
-alias chromep='google-chrome --profile-directory="Default" >/dev/null 2>&1 &'
-alias chromet='google-chrome --profile-directory="Profile 1" >/dev/null 2>&1 &'
 alias vpnon='sudo openvpn --config .vpn/pabloreina@genially.com.developers.ovpn --daemon'
 alias vpnoff='sudo pkill openvpn'
+alias ll='ls -lah'
+alias la='ls -A'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ports='ss -tulanp'              # Ver puertos en uso
+alias myip='curl -s ifconfig.me'      # IP pública
+alias reload='source ~/.zshrc'        # Recargar config
+alias path='echo $PATH | tr ":" "\n"' # Ver PATH legible
+alias rm='rm -i'
+alias mv='mv -i'
+alias cp='cp -i'
 
 # Functions
 grbih() {
     git rebase --interactive "HEAD~$1"
 }
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-export PATH="$HOME/scripts:$PATH"
-
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-# PATH
-export PATH="$HOME/.local/bin:$PATH"
-export PATH="$PATH:/opt/flutter/bin"
-
-autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C /usr/bin/terraform terraform
